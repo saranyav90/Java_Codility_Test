@@ -13,45 +13,54 @@ import java.util.TreeSet;
  *    where each student has student name, student marks and student reg no information.
  * 
  */
-public class Question2{
 
-	int n=5;
-	// the custom datatype class
-class Student {
+//When a class implements the Java Comparable interface, this means that instances (objects) of that class 
+//can be compared to each other
+public class Question2 implements Comparable<Question2>{
+
+	
 	String name;
 	int marks;
 	String regNo;
 	
 	//COnstructor
-	public Student(String name,int marks,String regNo) {
+	public Question2(String name,int marks,String regNo) {
 		this.name=name;
 		this.marks=marks;
 		this.regNo=regNo;
 	}
-}
+	
+	@Override
+	public int compareTo(Question2 o) {
+		// TODO Auto-generated method stub
+		return o.marks-this.marks;
+	}
+
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String[] name= {"John", "Peter","Victor","Edward","Steve"};
-		int[] marks= {80,70,90,75,85};
-		String[] regNo= {"100","101","102","103","104"};
-		Question2 studentData=new Question2();
-		studentData.rankValues(name,marks,regNo);
+		List <Question2> students=new ArrayList<Question2>();
+		students.add(new Question2("John", 80, "100"));
+		students.add(new Question2("Peter", 70, "101"));
+		students.add(new Question2("Victor", 90, "102"));
+		students.add(new Question2("Edward", 75, "103"));
+		students.add(new Question2("Steve", 85, "104"));
+		
+		Collections.sort(students);
+		int k = 1;
+		for(Question2 s: students) {
+			System.out.print(s.name+" with "+s.marks+" marks and RegNO:"+s.regNo+" got ");
+			System.out.println("Rank :"+k);
+			k++;
+			
+		}
+		
 	}
 
-	void rankValues(String[] name, int[] marks, String[] regNo) {
-		// TODO Auto-generated method stub
-		 ArrayList<Student> dataList=new ArrayList();
-			for(int i=0;i<n;i++) {
-				dataList.add(new Student(name[i],marks[i],regNo[i]));
-				
-				Student data = dataList.get(i); 
-				Map pairs=new HashMap();
-				pairs.put( data.regNo,data.marks);
-				
-				System.out.println(data.name+"  "+data.marks+"  "+data.regNo);
-			}
-	}
+
+	
+
+	
 
 	 
 }
